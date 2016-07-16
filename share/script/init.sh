@@ -18,14 +18,4 @@ ssh-add ~/.ssh/id_rsa
 ID_RSD=/home/core/share/resources/$HOSTNAME
 cat ~/.ssh/id_rsa.pub > $ID_RSD
 
-if [ "$HOSTNAME" = "core-02" ]; then
-	cat /home/core/share/resources/core-01 >> ~/.ssh/authorized_keys
-fi
-
-if [ "$HOSTNAME" = "core-01" ]; then
-	cat /home/core/share/resources/core-02 >> ~/.ssh/authorized_keys
-fi
-
-bash /home/core/share/script/app.sh
-
 exit 0

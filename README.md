@@ -12,6 +12,7 @@
 	vagrant ssh core-01
 	source .profile 
 	
+	# to test some commands
 	cd ~/share
 	bash script/app.sh
 ```

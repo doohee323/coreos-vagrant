@@ -16,18 +16,18 @@
 	bash script/app.sh
 ```
 
-* Shared folder / Init script
+* Test etcdctl / fleetctl
+```
+	- fleet template
+	- fleet sidekick
+```
+
+cf. Edited shared folder / init script
 ```
 	- edit Vagrantfile
 		## shared folder
 		config.vm.synced_folder ".", "/home/core/share", id: "core", :nfs => true, :mount_options => ['nolock,vers=3,udp']
 		## init script
 	    config.vm.provision :shell, :path => "script/init.sh"
-```
-
-* Test etcdctl / fleetctl
-```
-	- fleet template
-	- fleet sidekick
 ```
 

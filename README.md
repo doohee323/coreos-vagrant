@@ -1,8 +1,5 @@
 # Usecase
 
-https://discovery.etcd.io/new
-discovery: https://discovery.etcd.io/dbdb5f6e842328ee0feb5a86a72d7fbf
-
 * Shared folder / Init script
 ```
 	1. edit Vagrantfile

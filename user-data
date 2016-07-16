@@ -1,0 +1,47 @@
+#cloud-config
+
+---
+coreos:
+  etcd2:
+    discovery: https://discovery.etcd.io/5cb67985efc81168abfb578f509e849f
+    advertise-client-urls: http://$public_ipv4:2379
+    initial-advertise-peer-urls: http://$private_ipv4:2380
+    listen-client-urls: http://0.0.0.0:2379,http://0.0.0.0:4001
+    listen-peer-urls: http://$private_ipv4:2380,http://$private_ipv4:7001
+  fleet:
+    public-ip: $public_ipv4
+  flannel:
+    interface: $public_ipv4
+  units:
+  - name: etcd2.service
+    command: start
+  - name: fleet.service
+    command: start
+  - name: flanneld.service
+    drop-ins:
+    - name: 50-network-config.conf
+      content: |
+        [Service]
+        ExecStartPre=/usr/bin/etcdctl set /coreos.com/network/config '{ "Network": "10.1.0.0/16" }'
+    command: start
+  - name: docker-tcp.socket
+    command: start
+    enable: true
+    content: |
+      [Unit]
+      Description=Docker Socket for the API
+
+      [Socket]
+      ListenStream=2375
+      Service=docker.service
+      BindIPv6Only=both
+
+      [Install]
+      WantedBy=sockets.target
+users:
+- name: doohee323
+  groups:
+  - sudo
+  - docker
+  ssh-authorized-keys:
+  - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC/XR5LyPk4BknH+cgPIiOLyel9coFFA3EvIHzwCu8sIzJc5nLYmpEza+p4LCISe3G6pZmQO8busudfQwrmrA59Osa3gMEys+elgX5c0Ow2pHjfL05XpEJgzuCCEwpHNQyKqEH2sAd8PZkXAi1siOYOXtezHKCqAem8VUIBRjX+2ufx+GyCClpThIcjQyYMG3PSb25uXOIne1LViZ4DqBSnJnotPV80xMXK1BoEtgHZc0mFhLk+IDiOMbEDwWeZYBy3XiOQW7zSsX9oyqNh83PPpqsvfpJlsd4ghswm46j3gkVApl2S3Gz9liFqe0kd6DtcSEXXoIJCu2GqmJTWiPsHBLykRqsgt9l68eZx5Rd64lHgDvjMbbB5Qx/ZQKRWM6tfUgX80iXuj3bOF8LV9UhtelSXTu9dRckcP+ZU9IlvEjGGV8Dxd5G3UFxW+yR8tZagX7xojwV142R9YwTxtv1CjQ7/rnOwek3iEpgUgk6UokIgGKQd/Iww5WGgKpFrPTSLGyV8NOT4TO8CKWj5d55cZOt6q8UyqpvIlOCEk4bAhlYmxKQZJWZKZiJ6GKertDnugkXDPK+iAVZGxNuaPPJe4BBDSNS5xPmjj5LdpTM9VxZ9etVmbVQZocA2SjOipuWF0q1cKaAoc8rvW8XCps66wxBvX5LNi1C/nAkDC0Ox3w==

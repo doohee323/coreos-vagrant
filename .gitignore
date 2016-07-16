@@ -1,5 +1,7 @@
 .vagrant/
 log/
-user-data
-config.rb
+user-data.sample
+config.rb.sample
 /.project
+core-01
+core-02

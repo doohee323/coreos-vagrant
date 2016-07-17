@@ -13,6 +13,7 @@ source .profile
 
 ip addr show | grep 'inet 172.'
 
+mkdir -p /home/core/share/resources
 ssh-keygen -b 4096 -t rsa -f ~/.ssh/id_rsa -q -N ""
 ssh-add ~/.ssh/id_rsa
 ID_RSD=/home/core/share/resources/$HOSTNAME

@@ -3,4 +3,5 @@ log/
 user-data.sample
 config.rb.sample
 /.project
-resources
+core-01
+core-02

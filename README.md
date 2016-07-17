@@ -14,7 +14,7 @@
 	
 	# to test some commands
 	cd ~/share
-	bash script/app.sh
+	bash script/test.sh
 ```
 
 * Test etcdctl / fleetctl

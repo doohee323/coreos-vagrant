@@ -20,3 +20,14 @@ ID_RSD=/home/core/share/resources/$HOSTNAME
 cat ~/.ssh/id_rsa.pub > $ID_RSD
 
 exit 0
+
+# install shipyard
+ACTION=deploy PORT=5003 DISCOVERY=etcd://192.168.1.5:4001 bash shipyard.sh
+curl http://10.0.2.15:5003
+
+# update firewall iptable info
+cd /home/core/share/resources
+sudo coreos-cloudinit --from-file=user-data
+# call iptable update
+cd /home/core/share/service
+fleetctl start firewall.service

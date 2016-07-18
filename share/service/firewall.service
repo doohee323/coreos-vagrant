@@ -1,0 +1,10 @@
+[Unit]
+Description=Firewall Update
+After=docker.service
+
+[Service]
+Type=oneshot
+ExecStart=/sbin/iptables-restore /var/lib/iptables/rules-save
+
+[X-Fleet]
+Global=true

@@ -67,7 +67,17 @@ write_files:
       -A INPUT -p icmp -m icmp --icmp-type 3 -j ACCEPT
       -A INPUT -p icmp -m icmp --icmp-type 11 -j ACCEPT
       COMMIT      
-      
+    - path: /home/core/.docker/config.json
+      owner: core:core
+      permissions: '0644'
+      content: |
+        {
+          "https://registry.tz.com:5000": {
+            "auth": "testpassword",
+            "email": ""
+          }
+        }
+
 users:
 - name: doohee323
   groups:

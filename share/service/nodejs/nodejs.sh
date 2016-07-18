@@ -2,6 +2,9 @@
 
 set -x
 
+# with fleetctl
+# sudo fleetctl start nodejs.service
+
 ### [update certs] ############################################################################################################
 cd /home/core/share/resources
 sudo cp /home/core/share/resources/domain.crt /etc/ssl/certs/domain.pem

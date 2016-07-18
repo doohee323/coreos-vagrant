@@ -1,0 +1,15 @@
+[Unit]
+Description=NodeJs Service
+After=docker.service
+Requires=docker.service
+
+[Service]
+User=testuser
+ExecStartPre=-/usr/bin/docker kill node3
+ExecStartPre=-/usr/bin/docker rm node3
+ExecStartPre=/usr/bin/docker pull registry.tz.com:5000/testnode:0.1
+ExecStart=/usr/bin/docker run -d -p 3000:3000 --name node3 registry.tz.com:5000/testnode:0.1"
+#ExecStop=-/usr/bin/docker rm -f node3
+
+[Install]
+WantedBy=multi-user.target

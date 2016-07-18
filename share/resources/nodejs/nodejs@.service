@@ -1,0 +1,20 @@
+[Unit]
+Description=NodeJs %i
+After=docker.service
+Requires=docker.service
+
+[Service]
+TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker kill nodejs-%i
+ExecStartPre=-/usr/bin/docker rm nodejs-%i
+ExecStartPre=/usr/bin/docker pull rosskukulinski/nodejs1
+ExecStart=/usr/bin/docker run \
+  --name nodejs-%i \
+  --rm \
+  -p 3000:3000 \
+  -e INSTANCE=%i \
+  rosskukulinski/nodejs1
+ExecStop=-/usr/bin/docker rm -f nodejs-%i
+
+[X-Fleet]
+Conflicts=nodejs@*.service

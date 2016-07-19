@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+sudo su
 set -x
 
 cd /home/core/share/service
@@ -22,7 +23,6 @@ etcdctl exec-watch --recursive /test -- sh -c "env | grep ETCD"
 etcdctl set /test/bar 1
 
 echo "##[test systemctl]####################################"
-sudo su
 cd /etc/systemd/system
 cp /home/core/share/service/hello.service .
 systemctl enable hello.service

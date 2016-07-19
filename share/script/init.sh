@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+sudo su
 set -x
 
 echo '##########' >> /home/core/.profile
@@ -27,7 +28,7 @@ curl http://10.0.2.15:5003
 
 # update firewall iptable info
 cd /home/core/share/resources
-sudo coreos-cloudinit --from-file=user-data
+coreos-cloudinit --from-file=user-data
 # call iptable update
 cd /home/core/share/service
 fleetctl start firewall.service

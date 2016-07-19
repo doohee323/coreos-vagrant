@@ -1,22 +1,23 @@
 #!/usr/bin/env bash
 
+sudo su
 set -x
 
 # with fleetctl
-# sudo fleetctl start nodejs.service
+# fleetctl start nodejs.service
 
 ### [update certs] ############################################################################################################
 cd /home/core/share/resources
-sudo cp /home/core/share/resources/domain.crt /etc/ssl/certs/domain.pem
-sudo update-ca-certificates | grep domain
+cp /home/core/share/resources/domain.crt /etc/ssl/certs/domain.pem
+update-ca-certificates | grep domain
 
 ### [pull test image from external server with https] ##########################################################################
-sudo docker login --username=testuser --password=testpassword --email= https://registry.tz.com:5000
+docker login --username=testuser --password=testpassword --email= https://registry.tz.com:5000
 
-sudo docker pull registry.tz.com:5000/testnode:0.1
-sudo docker images
+docker pull registry.tz.com:5000/testnode:0.1
+docker images
 
-sudo docker run -d -p 3000:3000 --name node3 \
+docker run -d -p 3000:3000 --name node3 \
     registry.tz.com:5000/testnode:0.1
 
 sleep 3

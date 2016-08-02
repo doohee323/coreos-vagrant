@@ -2,7 +2,8 @@
 log/
 user-data.sample
 config.rb.sample
-/.project
+.project
 core-01
 core-02
-/Introduction to CoreOS - Working Files/
+Introduction to CoreOS - Working Files/
+Chapter 5/

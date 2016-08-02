@@ -38,14 +38,11 @@ coreos:
 
       [Install]
       WantedBy=sockets.target
-      
 write_files:
-  - path: "/etc/hosts"
-    permissions: "0644"
-    owner: "root"
-    content: |
-      192.168.82.171	registry.tz.com
-      
+- path: /etc/hosts
+  permissions: '0644'
+  owner: root
+  content: "192.168.82.171\tregistry.tz.com\n"
 users:
 - name: doohee323
   groups:

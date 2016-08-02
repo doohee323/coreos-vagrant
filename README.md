@@ -34,9 +34,9 @@ cf. Edited shared folder / init script
 
 * Test Nodejs app from private docker registry
 ```
-	cf. https://github.com/doohee323/dockerInVagrant
+	cf. https://github.com/doohee323/docker-registry-vagrant
 		copy from domain.crt to resources folder 
-		$ cp ~/dockerInVagrant/domain.crt ~/coreos-vagrant/share/resources/domain.crt
+		$ cp ~/docker-registry-vagrant/domain.crt ~/coreos-vagrant/share/resources/domain.crt
 		
 		core@core-01 ~/share/script $ bash nodejs.sh
 		curl http://172.17.8.101:3000
